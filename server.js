@@ -10,6 +10,7 @@
 // console.log(global);
 // 4) Has Common Core modules that we will explore
 // 5) CommonJS modules instead of ES6 modules
+// 6) Missing some JS APIs like fetch
 
 const os = require("os");
 const path = require("path");
