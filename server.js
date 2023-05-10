@@ -19,7 +19,7 @@ const math = require("./math");
 console.log(math.add(2, 3));
 console.log(math.divide(2, 3));
 console.log(math.multiply(2, 3));
-console.log(math.subtract(2, 3));
+console.log(math.subtract(2, 4));
 
 // console.log(os.type()); // Darwin
 // console.log(os.version()); // Darwin Kernel Version 22.4.0: Mon Mar  6 20:59:28 PST 2023; root:xnu-8796.101.5~3/RELEASE_ARM64_T6000
