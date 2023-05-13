@@ -1,0 +1,20 @@
+{
+  "name": "part-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "keywords": [],
+  "dependencies": {
+    "date-fns": "^2.23.0",
+    "uuid": "^8.3.2"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
