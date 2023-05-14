@@ -1,0 +1,16 @@
+{
+  "name": "part-5",
+  "version": "1.0.0",
+  "description": "Express tutorial",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
