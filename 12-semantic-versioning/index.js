@@ -8,3 +8,10 @@
 
 // "^5.7.7" => caret ^ // v5.x
 // "tilda5.7.7" => tilda v5.7.x
+
+// npm list => loyihamizda ishlatilgan paketlarni versiyasini bilish uchun
+// npm list --dept=0 => faqat biz ornatgan paketlarni o'zinigina ko'rish uchun
+
+
+// npm view => bu orqali biron bir package haqida bilmoqchi bo'lsak ishlatamiz
+// example npm view mongoose
