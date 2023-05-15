@@ -7,4 +7,6 @@ const busyMem = os.totalmem();
 console.log(busyMem);
 
 console.log(`Bo'sh hotira miqdori: ${freeMem} bayt`);
+
+
 console.log(`Foydalanuvchi haqida malumot: ${userInfo.username}`);
