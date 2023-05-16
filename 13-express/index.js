@@ -1,12 +1,22 @@
-// https://virtualdars.com/api/customers
+const express = require("express");
 
-// protocol => https://
-// domain => virtualdars.com
-// optional => /api
-// resource => /customers
+const app = express();
 
-// GET => Ma'lumotni hammasini yoki bittasini olish
-// POST => Yangi ma'lumot yaratish
-// PUT => Ma'lumotni yangilash
-// PATCH => Ma'lumotni qisman yangilash
-// DELETE => Ma'lumotni o'chirish
+app.get("/", (req, res) => {
+  res.send("Salom");
+});
+
+app.get("/api/books", (req, res) => {
+  res.send([
+    "rich dad poor dad",
+    "good to great",
+    "how to win friends and influence people",
+    "the war of art",
+  ]);
+});
+
+const port = process.env.PORT || 8000;
+
+app.listen(port, () => {
+  console.log(`${port} portni eshitishni boshladim...`);
+});
