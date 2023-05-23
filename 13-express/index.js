@@ -15,6 +15,18 @@ app.get("/api/books", (req, res) => {
   ]);
 });
 
+app.get("/api/books/:id", (req, res) => {
+  res.send(req.params.id);
+}); // paramslarni olish uchun
+
+app.get("/api/articles/:year/:month", (req, res) => {
+  res.send(req.query);
+}); // query objectni olish uchun
+
+app.get("/api/articles/:year/:month", (req, res) => {
+  res.send(req.params);
+});
+
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
