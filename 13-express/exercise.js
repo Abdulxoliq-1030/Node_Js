@@ -4,10 +4,12 @@ const logger = require("./logger");
 const auth = require("./auth");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const app = express();
-app.use(express.json());
 
-// app.use(logger);
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // key1=value1&key2=value2
+app.use(express.static("public")); // fayllarni o'qish uchun ishlatiladigan middleware
 app.use(auth);
 app.use(helmet());
 app.use(morgan("tiny"));
@@ -77,7 +79,7 @@ function validateCategory(category) {
   return Joi.validate(category, schema);
 }
 
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
   console.log(`${port} portni eshitishni boshladim...`);

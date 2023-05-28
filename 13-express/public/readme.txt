@@ -1,0 +1,1 @@
+Bu yerda muhim ma'lumot yozilgan
