@@ -2,12 +2,15 @@ const express = require("express");
 const Joi = require("joi");
 const logger = require("./logger");
 const auth = require("./auth");
+const helmet = require("helmet");
+const morgan = require("morgan");
 const app = express();
 app.use(express.json());
 
-app.use(logger);
-
+// app.use(logger);
 app.use(auth);
+app.use(helmet());
+app.use(morgan("tiny"));
 
 const categories = [
   { id: 1, name: "Dasturlash" },
