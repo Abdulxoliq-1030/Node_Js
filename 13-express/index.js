@@ -19,25 +19,14 @@ app.get("/api/books", (req, res) => {
   res.send(books);
 });
 
+// CREATE BOOK
 app.post("/api/books", (req, res) => {
-  const bookSchema = {
-    name: Joi.string().required().min(3),
-  };
+  const { error } = validateBook(req.body);
 
-  const result = Joi.validate(req.body, bookSchema);
-
-  if (result.error) {
-    res.status(400).send(result.error.details[0].message);
+  if (error) {
+    res.status(400).send(error.details[0].message);
   }
 
-  // if (!req.body.name) {
-  //   res.status(400).send("Name is required");
-  //   return;
-  // }
-  // if (req.body.name.length < 3) {
-  //   res.status(400).send("Name should be at least 3 characters");
-  //   return;
-  // }
   const book = {
     id: books.length + 1,
     name: req.body.name,
@@ -46,19 +35,44 @@ app.post("/api/books", (req, res) => {
   res.status(201).send(book);
 });
 
+// BOOK GET BY ID
 app.get("/api/books/:id", (req, res) => {
   const book = books.find((b) => b.id === parseInt(req.params.id));
-  if (!book) res.status(404).send("Berilgan ID ga teng kitob topilmadi");
+  if (!book) return res.status(404).send("Berilgan ID ga teng kitob topilmadi");
   res.send(book);
-}); // paramslarni olish uchun
-
-// app.get("/api/articles/:year/:month", (req, res) => {
-//   res.send(req.query);
-// }); // query objectni olish uchun
-
-app.get("/api/articles/:year/:month", (req, res) => {
-  res.send(req.params);
 });
+
+// PUT
+app.put("/api/books/:id", (req, res) => {
+  let book = books.find((b) => b.id === parseInt(req.params.id));
+  if (!book) return res.status(404).send("Berilgan ID ga teng kitob topilmadi");
+  const { error } = validateBook(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
+  }
+  book.name = req.body.name;
+  res.send(book);
+});
+
+// DELETE
+app.delete("/api/books/:id", (req, res) => {
+  const book = books.find((b) => b.id === parseInt(req.params.id));
+  if (!book)
+    return res.status(404).send("Berilgan ID ga teng bo'lgan kitob topilmadi");
+
+  const bookIndex = books.indexOf(book);
+  books.splice(bookIndex, 1);
+  res.send(book);
+});
+
+// Books validation
+function validateBook(book) {
+  const bookSchema = {
+    name: Joi.string().required().min(3),
+  };
+
+  return Joi.validate(book, bookSchema);
+}
 
 const port = process.env.PORT || 8000;
 
