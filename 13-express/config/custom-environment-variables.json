@@ -1,0 +1,6 @@
+{
+	"name": "my node app - dev",
+	"mailserver": {
+		"password": "app-password"
+	}
+}
