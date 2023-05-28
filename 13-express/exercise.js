@@ -4,8 +4,12 @@ const logger = require("./logger");
 const auth = require("./auth");
 const helmet = require("helmet");
 const morgan = require("morgan");
-
 const app = express();
+
+if (app.get("env" === "development")) {
+  app.use(morgan("tiny"));
+  console.log("Logger ishlayapti...");
+}
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // key1=value1&key2=value2
@@ -13,6 +17,9 @@ app.use(express.static("public")); // fayllarni o'qish uchun ishlatiladigan midd
 app.use(auth);
 app.use(helmet());
 app.use(morgan("tiny"));
+
+console.log(process.env.NODE_ENV); // undefined
+console.log(app.get("env")); // development
 
 const categories = [
   { id: 1, name: "Dasturlash" },
