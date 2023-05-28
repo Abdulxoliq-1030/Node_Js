@@ -1,8 +1,13 @@
 const express = require("express");
 const Joi = require("joi");
+const logger = require("./logger");
+const auth = require("./auth");
 const app = express();
-
 app.use(express.json());
+
+app.use(logger);
+
+app.use(auth);
 
 const categories = [
   { id: 1, name: "Dasturlash" },
