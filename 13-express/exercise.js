@@ -14,6 +14,7 @@ app.use(express.static("public")); // fayllarni o'qish uchun ishlatiladigan midd
 app.use(auth);
 app.use(helmet());
 app.use(morgan("tiny"));
+app.set("view engine", "pug");
 
 if (app.get("env" === "development")) {
   app.use(morgan("tiny"));
@@ -32,6 +33,13 @@ const categories = [
   { id: 2, name: "Ma'lumot omborlari" },
   { id: 3, name: "Kompyuter tarmoqlari" },
 ];
+
+app.get("/", (req, res) => {
+  res.render("index", {
+    title: "My express app",
+    greeting: "Assalomu alaykum",
+  });
+});
 
 app.get("/api/categories", (req, res) => {
   res.send(categories);
