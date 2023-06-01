@@ -17,4 +17,20 @@ const bookSchema = new mongoose.Schema({
   isPublished: Boolean,
 });
 
+const Book = mongoose.model("Book", bookSchema);
+
+async function createBook() {
+  const book = new Book({
+    name: "NodeJS -  qo'llanma",
+    author: "Abdulxoliq Odiljonov",
+    tags: ["js", "dasturlash", "node"],
+    isPublished: true,
+  });
+
+  const savedBook = await book.save();
+  console.log(savedBook);
+}
+
+createBook();
+
 // String,Number,Date,Buffer,Boolean,ObjectId,Array
