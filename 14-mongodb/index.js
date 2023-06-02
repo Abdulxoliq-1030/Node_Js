@@ -32,13 +32,10 @@ async function createBook() {
 }
 
 async function getBooks() {
-  const books = await Book.find({ author: /^A/ }) // Muallifning ismi A harfidan boshlangan ma'lumotlarni olib beradi
-    // .find({author: "Abdulxoliq Odiljonov"})
+  const books = await Book.find({ author: "Abdulxoliq Odiljonov" })
     .limit(2)
     .sort({ name: 1 })
-    // .select({ tags: 0 }); // bu holatda tags olinmaydi
-    .select({ name: 1, tags: 1 }); // bu holatda faqat tags bilan name olinadi
-  // .count();
+    .select({ name: 1, tags: 1 });
 
   console.log(books);
 }
