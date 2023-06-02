@@ -31,6 +31,18 @@ async function createBook() {
   console.log(savedBook);
 }
 
-createBook();
+async function getBooks() {
+  const books = await Book.find({
+    author: "Abdulxoliq Odiljonov",
+    isPublished: true,
+  })
+    .limit(2)
+    .sort({ name: 1 })
+    // .select({ tags: 0 }); bu holatda tags olinmaydi
+    .select({ name: 1, tags: 1 });
+  console.log(books);
+}
+
+getBooks();
 
 // String,Number,Date,Buffer,Boolean,ObjectId,Array
