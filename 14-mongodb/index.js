@@ -32,17 +32,27 @@ async function createBook() {
 }
 
 async function getBooks() {
-  const books = await Book.find({
-    author: "Abdulxoliq Odiljonov",
-    isPublished: true,
-  })
+  const books = await Book.find()
+    .and([{ author: "Abdulxoliq Odiljonov" }, { isPublished: true }])
     .limit(2)
     .sort({ name: 1 })
-    // .select({ tags: 0 }); bu holatda tags olinmaydi
-    .select({ name: 1, tags: 1 });
+    // .select({ tags: 0 }); // bu holatda tags olinmaydi
+    // .select({ name: 1, tags: 1 }); // bu holatda faqat tags bilan name olinadi
+    .count();
+
   console.log(books);
 }
 
 getBooks();
 
 // String,Number,Date,Buffer,Boolean,ObjectId,Array
+
+// Compare Operators
+// $eq (equal)
+// $ne (not equal)
+// $gt (greather than)
+// $gte (greather than or equal)
+// $lt (less than)
+// $lte (less than or equal)
+// $in
+// $nin (not in)
