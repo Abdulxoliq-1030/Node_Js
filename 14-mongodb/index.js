@@ -43,7 +43,38 @@ async function getBooks() {
   console.log(books);
 }
 
-getBooks();
+async function updateBook1(id) {
+  const book = await Book.findById(id);
+  if (!book) {
+    return;
+  }
+  book.isPublished = true;
+  book.author = "Farkhod";
+
+  //   book.set({
+  // 	isPublished: true,
+  // 	author: "John",
+  //   });
+  const updatedBook = await book.save();
+
+  console.log(updatedBook);
+}
+
+async function updateBook2(id) {
+  const result = await Book.updateOne(
+    { _id: id },
+    {
+      $set: {
+        author: "Farhod",
+        isPublished: false,
+      },
+    }
+  );
+
+  console.log(result);
+}
+
+updateBook2("64792eddab15d557e6d7ed90");
 
 // String,Number,Date,Buffer,Boolean,ObjectId,Array
 
