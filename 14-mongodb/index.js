@@ -51,12 +51,7 @@ async function updateBook1(id) {
   book.isPublished = true;
   book.author = "Farkhod";
 
-  //   book.set({
-  // 	isPublished: true,
-  // 	author: "John",
-  //   });
   const updatedBook = await book.save();
-
   console.log(updatedBook);
 }
 
@@ -70,11 +65,15 @@ async function updateBook2(id) {
       },
     }
   );
-
   console.log(result);
 }
 
-updateBook2("64792eddab15d557e6d7ed90");
+async function deleteBook(id) {
+  const book = await Book.findByIdAndRemove({ _id: id });
+  console.log(book);
+}
+
+deleteBook("647a8acf98e11cdea7f3cd0c");
 
 // String,Number,Date,Buffer,Boolean,ObjectId,Array
 
