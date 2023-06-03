@@ -17,7 +17,19 @@ const bookSchema = new mongoose.Schema({
     maxlength: 100,
   },
   author: String,
-  tags: [String],
+  tags: {
+    type: Array,
+    validate: {
+      isAsync: true,
+      validator: function (val, callback) {
+        setTimeout(() => {
+          const result = val && val.length > 0;
+          callback(result);
+        }, 5000);
+      },
+      message: "Kitobning kamida bitta tegi bo'lishi kerak",
+    },
+  },
   date: { type: Date, default: Date.now },
   isPublished: Boolean,
   price: {
