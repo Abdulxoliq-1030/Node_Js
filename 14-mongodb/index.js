@@ -22,10 +22,10 @@ const bookSchema = new mongoose.Schema({
     validate: {
       isAsync: true,
       validator: function (val, callback) {
-        setTimeout(() => {
-          const result = val && val.length > 0;
-          callback(result);
-        }, 5000);
+        // setTimeout(() => {
+        //   //   callback(result);
+        // }, 5000);
+        const result = val && val.length > 0;
       },
       message: "Kitobning kamida bitta tegi bo'lishi kerak",
     },
@@ -39,12 +39,15 @@ const bookSchema = new mongoose.Schema({
     },
     min: 10,
     max: 300,
+    get: (val) => Math.round(val),
+    set: (val) => Math.round(val),
   },
   category: {
     type: String,
     required: true,
     enum: ["classic", "biography", "science"],
-    // match: //
+    lowercase: true,
+    trim: true,
   },
 });
 
@@ -56,7 +59,7 @@ async function createBook() {
     author: "Abdulxoliq Odiljonov",
     tags: ["js", "dasturlash", "node"],
     isPublished: true,
-    price: 100,
+    price: 100.7,
     category: "classic",
   });
 
