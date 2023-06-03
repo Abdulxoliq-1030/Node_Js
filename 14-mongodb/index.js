@@ -10,11 +10,30 @@ mongoose
   });
 
 const bookSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 100,
+  },
   author: String,
   tags: [String],
   date: { type: Date, default: Date.now },
   isPublished: Boolean,
+  price: {
+    type: Number,
+    required: function () {
+      return this.isPublished;
+    },
+    min: 10,
+    max: 300,
+  },
+  category: {
+    type: String,
+    required: true,
+    enum: ["classic", "biography", "science"],
+    // match: //
+  },
 });
 
 const Book = mongoose.model("Book", bookSchema);
@@ -25,10 +44,16 @@ async function createBook() {
     author: "Abdulxoliq Odiljonov",
     tags: ["js", "dasturlash", "node"],
     isPublished: true,
+    price: 100,
+    category: "classic",
   });
 
-  const savedBook = await book.save();
-  console.log(savedBook);
+  try {
+    const savedBook = await book.save();
+    console.log(savedBook);
+  } catch (ex) {
+    console.log(ex);
+  }
 }
 
 async function getBooks() {
@@ -73,61 +98,5 @@ async function deleteBook(id) {
   console.log(book);
 }
 
-deleteBook("647a8acf98e11cdea7f3cd0c");
-
-// String,Number,Date,Buffer,Boolean,ObjectId,Array
-
-// Compare Operators
-// $eq (equal)
-// $ne (not equal)
-// $gt (greather than)
-// $gte (greather than or equal)
-// $lt (less than)
-// $lte (less than or equal)
-// $in
-// $nin (not in)
-
-// const mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true, useUnifiedTopology: true })
-//     .then(() => {
-//         console.log('MongoDBga ulanish hosil qilindi...');
-//     })
-//     .catch((err) => {
-//         console.error('MongoDBga ulanish vaqtida xato ro\'y berdi...', err);
-//     });
-
-// const SizeSchema = new mongoose.Schema({
-//     h: Number,
-//     w: Number,
-//     uom: String
-// })
-
-// const inventorySchema = new mongoose.Schema({
-//     item: String,
-//     qty: Number,
-//     size: SizeSchema,
-//     status: String
-// }, { collection: 'inventory' });
-
-// const Inventory = mongoose.model('Inventory', inventorySchema);
-
-// async function getInventoryItems1() {
-//     return await Inventory
-//         .find({ status: 'A' })
-//         .sort({ item: 1 })
-//         .select({ item: 1, qty: 1, _id: 0 })
-// }
-
-// async function getInventoryItems2() {
-//     return await Inventory
-//         .find()
-//         .or([{ qty: { $lte: 50 } }, { item: /.*l.*/i }])
-//         .sort({ qty: -1 })
-// }
-
-// async function run() {
-//     const items = await getInventoryItems2();
-//     console.log(items);
-// }
-
-// run();
+// deleteBook("647a8acf98e11cdea7f3cd0c");
+createBook();
